@@ -1,7 +1,9 @@
 #-------------------------------
 # General Site Settings
+title: "Harry Stansfield Portfolio"
+description: "Harry Stansfield Portfolio"
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://avenco.netlify.app" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://harrystans.github.io/SirDevAlot-Website/"
 
 
 #-------------------------------
