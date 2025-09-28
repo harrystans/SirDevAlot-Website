@@ -13,15 +13,15 @@ $background-gradient: linear-gradient(135deg, #1e1b4b, #3a0ca3, #7209b7, #4361ee
 $background-color: #1e1b4b;
 $background-color-alt: #2a245d;
 
-$text-color: $secondary-color;
-$text-color-alt: $dark;
+$text-color: $white;
+$text-color-alt: $white;
 
-$heading-font-color: $primary-color;
+$heading-font-color: $white;
 
-$link-color: $#cfcfe1;
+$link-color: $white;
 $link-color-hover: lighten($accent-color, 10%);
 
-$button-color: $accent-color;
+$button-color: $white;
 $button-background-color: $primary-color;
 $button-background-hover: darken($primary-color, 7%);
 
