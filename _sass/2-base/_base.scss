@@ -296,41 +296,12 @@ table td {
   }
 }
 
-.top-cover {
-  top: 0;
-  height: 480px;
-
-  .cover-image {
-    &::after {
-      will-change: transform;
-      background: linear-gradient(180deg, rgba($white, 0.8) 0%, $white 95%);
-
-      @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-        background: linear-gradient(180deg, rgba($white, 0.65) 0%, $white 95%);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-      }
-    }
-  }
+.top-cover .cover-image::after {
+    background: linear-gradient(180deg, rgba(30, 27, 75, 0.85) 0%, rgba(67, 97, 238, 0.95) 95%);
 }
 
-.footer-cover {
-  bottom: 0;
-  height: 220px;
-  border-top: 1px solid $white;
-
-  .cover-image {
-    &::after {
-      will-change: transform;
-      background: linear-gradient(0, rgba($white, 0.8) 0%, $white 95%);
-
-      @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
-        background: linear-gradient(0, rgba($white, 0.65) 0%, $white 95%);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-      }
-    }
-  }
+.footer-cover .cover-image::after {
+    background: linear-gradient(0, rgba(30, 27, 75, 0.85) 0%, rgba(67, 97, 238, 0.95) 95%);
 }
 
 .lazy {
