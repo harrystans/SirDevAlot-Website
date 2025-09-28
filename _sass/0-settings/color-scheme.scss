@@ -1,30 +1,33 @@
 /* Color Scheme */
-$primary-color: #4235d0;
-$secondary-color: #f969cd;
-$white: #fff;
-$dark: #120f3e;
-$gray: #d9d9d9;
-$light-gray: #f5f5f5;
-$blue-gray: #58576d;
+$primary-color: #5b3cf3; // stronger purple-blue
+$secondary-color: #a855f7; // magenta-purple accent
+$accent-color: #4cc9f0; // bright cyan pop
 
-$background-color: $white;
-$background-color-alt: $white;
+$white: #ffffff;
+$dark: #0f0b2e;
+$gray: #cfcfe1;
+$light-gray: #f6f6fa;
+$blue-gray: #5e5d7a;
 
-$text-color: $dark;
+$background-gradient: linear-gradient(135deg, #1e1b4b, #3a0ca3, #7209b7, #4361ee);
+$background-color: #1e1b4b;
+$background-color-alt: #2a245d;
+
+$text-color: $white;
 $text-color-alt: $blue-gray;
 
-$heading-font-color: $text-color;
+$heading-font-color: $white;
 
-$link-color: $text-color;
-$link-color-hover: $primary-color;
+$link-color: $accent-color;
+$link-color-hover: lighten($accent-color, 10%);
 
-$button-color: $background-color-alt;
+$button-color: $white;
 $button-background-color: $primary-color;
-$button-background-hover: darken($primary-color, 5%);
+$button-background-hover: darken($primary-color, 7%);
 
-$border-color: #ededf3;
+$border-color: rgba(255, 255, 255, 0.15);
 
-$hr-color: $text-color;
-$tr-color: #f0f0f0;
+$hr-color: rgba(255, 255, 255, 0.2);
+$tr-color: rgba(255, 255, 255, 0.05);
 
-$syntax-highlighting-background: #f3f3f3;
+$syntax-highlighting-background: #2a245d;

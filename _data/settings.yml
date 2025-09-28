@@ -1,9 +1,9 @@
 #-------------------------------
 # Site Settings
 
-title: Avenco
+title: SirDevAlot Portfolio
 logo: # You can add own logo. For example '/images/logo.png'.
-description: Avenco – Creative Portfolio Theme for Jekyll
+description: Harry Stansfield's Portfolio
 
 menu__settings:
   menu__items:
@@ -108,7 +108,7 @@ contact__settings:
 
 #-------------------------------
 # Comment Section (Disqus)
-disqus-identifier: anvodstudio-demo # add your shortname for Disqus Comment. For example anvodstudio-demo
+# disqus-identifier: anvodstudio-demo # add your shortname for Disqus Comment. For example anvodstudio-demo
 
 
 #-------------------------------
