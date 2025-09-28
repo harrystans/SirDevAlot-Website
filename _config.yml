@@ -1,9 +1,8 @@
-
 # General Site Settings
 title: "Harry Stansfield Portfolio"
 description: "Harry Stansfield Portfolio"
-baseurl: "/SirDevAlot-Website" 
-url: "https://harrystans.github.io"
+baseurl: "" 
+url: "https://harrystans.github.io/SirDevAlot-Website/"
 
 # Build Settings
 markdown: kramdown
