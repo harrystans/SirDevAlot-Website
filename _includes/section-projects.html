@@ -31,6 +31,13 @@
                       <div class="project__subtitle">{{ project.subtitle }} –</div>
                     {% endif %}
                   </div>
+                  {% if project.tags.size >= 1 %}
+                    <div class="project-tags__box">
+                      {% for tag in project.tags %}
+                        <a href="{{ site.baseurl }}/project-tag/{{ tag | slugify }}" class="project__tag">{{ tag }}</a>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
                 </div>
               </div>
             </article>

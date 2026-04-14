@@ -4,22 +4,46 @@ date: 2026-04-13
 image: /images/ECHOHeader.png
 award: "University Project Grade: 90"
 description: "Puzzle platformer in darkness, echolocation mechanics, and a monster that hunts by sound."
+tags: [Unity, 2D, C#]
 ---
-**University Grade:** 90
+**Grade:** 90%
 
-Echo is a puzzle platformer that takes place in complete darkness. You have to use your echolocation to find keys to unlock the door and complete the level, but there is a monster that will know where you are when you make noise, and it's your job to traverse the environment without dying to escape.
+**Project Overview:** Echo is a sensory-driven puzzle platformer built around the concept of acoustic visualization. In a pitch-black environment, players must use echolocation to navigate and survive. The project focus was on developing a custom rendering pipeline for the "ping" effect and a high-fidelity character controller.
 
 <p><iframe src="https://www.youtube.com/embed/6WgSDusQ4-o" frameborder="0" allowfullscreen></iframe></p>
 
-## Core Features
+## Technical Highlights
 
-- **Echolocation Shader:** I created this effect with two programmed shaders: one is a dithered ring effect with variables for expansion and colours, and the other is an outline effect. I combined these shaders with a custom script to time the activation, making it look like the player has echolocation.
-- **Tile Code:** Along with a basic rule tile, I created a custom script that can make certain tiles not reactive to ping colours. This allows for green tiles in my game that indicate to the player that they cannot grapple with them.
-- **Grapple Hook:** The main way to traverse the world. It can pull physics objects to the player and pull the player to environment objects, and it also triggers the echolocation. Different grappable objects can emit different coloured pings.
-- **Centipede Monster:** I created a monster which listens to noise. Depending on variables such as distance and sound, the monster's aggression changes using a state machine with states like explore, aggressive, attack, wander, and sleep.
-- **Platformer Controller:** I created a platformer controller from scratch for this project that has features like Jump Buffering, Coyote Time, Anti-Gravity Apex, Speed Apex, Sticky Feet, Bumped Head and Corner Clipping Correction, and Variable Jump Height.
-- **Dynamic UI:** Using the new UI Toolkit, I created key animations that move when you collect a key and also update at the start of the level to show how many keys you need to collect.
-- **UI Toolkit Menu:** My first menu using UI Toolkit, featuring a settings menu, exit menu, and a level select that dynamically scales depending on the number of levels assigned.
+**Acoustic Visualization Shader Pipeline**
+
+**Multi-Pass Shader Effects:** Engineered a custom shader system combining a Dithered Circular Expansion effect with a Depth-based Outline Pass. This simulates sound waves hitting geometry in a purely black environment.
+
+**Script-to-Shader Synchronization:** Developed a C# controller to pass real-time position and expansion variables to the GPU, allowing for dynamic, timed "pings" that reveal the world based on player actions.
+
+**Selective Tile Interaction:** Extended the Unity Rule Tile system with a custom scriptable layer that toggles shader reactivity. This allows specific environment types (e.g, non-grappable green zones) to remain visually distinct during pings.
+
+**High-Fidelity Platformer Controller**
+
+**Tactile "Juice" Implementation:** Built a 2D controller from the ground up focusing on professional "game feel." Key features include:
+
+**Temporal Forgiveness:** Jump Buffering and Coyote Time.
+
+**Air Control Logic:** Anti-Gravity Apex and Speed Apex modifiers for fluid platforming.
+
+**Collision Polishing:** Corner Clipping Correction and "Bumped Head" logic to prevent momentum loss on geometry edges.
+
+**Physics-Driven Grappling:** Implemented a dual-purpose grapple system using Vector physics to either pull external objects toward the player or propel the player toward anchored geometry.
+
+**Sound-Reactive AI (The Centipede)**
+
+**Acoustic Sensing Model:** Developed an AI agent that "hears" the environment. It calculates aggression levels based on the distance and amplitude of player-generated pings.
+
+**Heuristic State Machine:** Architected a Finite State Machine (FSM) with 5 distinct states (Wander, Sleep, Explore, Aggressive, Attack). The AI uses a proximity-based weighted system to transition between searching for the player and active pursuit.
+
+**Modern UI Architecture**
+**Data-Driven UI Toolkit:** Leveraged Unity’s UI Toolkit (USS/UXML) to create a decoupled UI system.
+
+**Dynamic Content Scaling:** Built a level-select menu that procedurally generates and scales UI elements based on the assigned level count, ensuring a scalable and maintainable front-end.
 
 ## Gameplay Screenshots
 

@@ -4,9 +4,12 @@
 
 .highlight {
   background: $syntax-highlighting-background;
+  border-radius: 12px;
+  max-height: 500px;
+  overflow: auto;
 
   .highlighter-rouge & {
-    background: #eef;
+    background: $syntax-highlighting-background;
   }
 
   .c     { color: #998; font-style: italic } // Comment

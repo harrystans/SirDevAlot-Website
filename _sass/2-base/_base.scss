@@ -129,12 +129,16 @@ blockquote {
 
 pre {
   overflow: auto;
-  padding: 15px;
+  padding: 20px;
   margin-bottom: 0;
   font-size: 14px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  word-break: break-all;
+  line-height: 1.6;
+  white-space: pre;
+  word-wrap: normal;
+  word-break: normal;
+  background: $syntax-highlighting-background;
+  border-radius: 12px;
+  max-height: 500px;
 }
 
 img,

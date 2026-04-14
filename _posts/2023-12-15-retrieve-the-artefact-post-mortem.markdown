@@ -13,43 +13,178 @@ Retrieve the Artefact is a top-down shooter with procedurally generated environm
 
 <p><iframe src="https://www.youtube.com/embed/hbd46-uPhKw" frameborder="0" allowfullscreen></iframe></p>
 
-## What Went Well
+## The Technical Vision
 
-The procedural generation systems were the highlight of this project. Using the random walk algorithm for environment generation and constrained random walk for corridor generation gave each playthrough a unique feel. The weighted spawning system using the Dijkstra algorithm ensured enemies and items were placed in a balanced way throughout the levels.
+The main technical goal of the project was to create a project that acculimated my all my skills as a programmer into one project. The core features for this project are the procedural generation, complex weapon and enemy systems, and complex UI features such as rebinding.
 
-The weapon system was another success. Supporting multiple weapon types such as shotguns, snipers, pistols and miniguns, each with their own range, firing type (automatic, burst, manual), number of bullets and angle support for bullet spread, gave the gameplay real variety. The 2 gun holding system with primary and secondary switching, along with dropping and picking up guns, added a layer of strategy.
+## Architecture Spotlight: Procedural Generation using the Random Walk Algorithm
+
+I utilised variations of the random walk algorithm and combined them to create custom room and corridor spawning. I then use the information and locations (Vector2D<ints>) and pass it into a Dijkstra algorithm with the start location being the player to spawn the “artefact” at the furthest possible point from the player and using the rest to weight chests and environmental objects and enemies. 
+
+## C#
+
+```csharp
+protected override void RunProceduralGeneration()
+{
+    CreateRooms();
+}
+
+private void CreateRooms()
+{
+    var roomsList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(
+        new BoundsInt((Vector3Int)startPosition, 
+        new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
+
+    HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+
+    if (randomWalkRooms)
+    {
+        floor = CreateRoomsRandomly(roomsList);
+    }
+    else
+    {
+        floor = CreateSimpleRooms(roomsList);
+    }
+
+    List<Vector2Int> roomCenters = new List<Vector2Int>();
+    foreach (var room in roomsList)
+    {
+        roomCenters.Add((Vector2Int)Vector3Int.RoundToInt(room.center));
+    }
+
+    HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
+    floor.UnionWith(corridors);
+
+    tilemapVisualizer.PaintFloorTiles(floor);
+    WallGenerator.CreateWalls(floor, tilemapVisualizer);
+}
+
+private HashSet<Vector2Int> CreateRoomsRandomly(List<BoundsInt> roomsList)
+{
+    HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+    for (int i = 0; i < roomsList.Count; i++)
+    {
+        var roomBounds = roomsList[i];
+        var roomCenter = new Vector2Int(
+            Mathf.RoundToInt(roomBounds.center.x), 
+            Mathf.RoundToInt(roomBounds.center.y));
+        var roomFloor = RunRandomWalk(randomWalkParameters, roomCenter);
+        foreach (var position in roomFloor)
+        {
+            if (position.x >= (roomBounds.xMin + offset) && 
+                position.x <= (roomBounds.xMax - offset) && 
+                position.y >= (roomBounds.yMin - offset) && 
+                position.y <= (roomBounds.yMax - offset))
+            {
+                floor.Add(position);
+            }
+        }
+    }
+    return floor;
+}
+
+private HashSet<Vector2Int> ConnectRooms(List<Vector2Int> roomCenters)
+{
+    HashSet<Vector2Int> corridors = new HashSet<Vector2Int>();
+    var currentRoomCenter = roomCenters[Random.Range(0, roomCenters.Count)];
+    roomCenters.Remove(currentRoomCenter);
+
+    while (roomCenters.Count > 0)
+    {
+        Vector2Int closest = FindClosestPointTo(currentRoomCenter, roomCenters);
+        roomCenters.Remove(closest);
+        HashSet<Vector2Int> newCorridor = CreateCorridor(currentRoomCenter, closest);
+        currentRoomCenter = closest;
+        corridors.UnionWith(newCorridor);
+    }
+    return corridors;
+}
+
+private HashSet<Vector2Int> CreateCorridor(Vector2Int currentRoomCenter, Vector2Int destination)
+{
+    HashSet<Vector2Int> corridor = new HashSet<Vector2Int>();
+    var position = currentRoomCenter;
+    corridor.Add(position);
+    while (position.y != destination.y)
+    {
+        if (destination.y > position.y)
+        {
+            position += Vector2Int.up;
+        }
+        else if (destination.y < position.y)
+        {
+            position += Vector2Int.down;
+        }
+        corridor.Add(position);
+    }
+    while (position.x != destination.x)
+    {
+        if (destination.x > position.x)
+        {
+            position += Vector2Int.right;
+        }
+        else if (destination.x < position.x)
+        {
+            position += Vector2Int.left;
+        }
+        corridor.Add(position);
+    }
+    return corridor;
+}
+
+private Vector2Int FindClosestPointTo(Vector2Int currentRoomCenter, List<Vector2Int> roomCenters)
+{
+    Vector2Int closest = Vector2Int.zero;
+    float distance = float.MaxValue;
+    foreach (var position in roomCenters)
+    {
+        float currentDistance = Vector2.Distance(position, currentRoomCenter);
+        if (currentDistance < distance)
+        {
+            distance = currentDistance;
+            closest = position;
+        }
+    }
+    return closest;
+}
+
+private HashSet<Vector2Int> CreateSimpleRooms(List<BoundsInt> roomsList)
+{
+    HashSet<Vector2Int> floor = new HashSet<Vector2Int>();
+    foreach (var room in roomsList)
+    {
+        for (int col = offset; col < room.size.x - offset; col++)
+        {
+            for (int row = offset; row < room.size.y - offset; row++)
+            {
+                Vector2Int position = (Vector2Int)room.min + new Vector2Int(col, row);
+                floor.Add(position);
+            }
+        }
+    }
+    return floor;
+}
+```
 
 <div class="gallery-box">
   <div class="gallery">
     <img src="/images/RetreiveTheArtefactGameplayImage1.png" alt="Gameplay">
     <img src="/images/RetreiveTheArtefactGameplayImage2.png" alt="Gameplay">
   </div>
-  <em>Retrieve The Artefact Gameplay</em>
+  <em>Retrieve The Artefact UI and Gameplay</em>
 </div>
 
-## Challenges
+## Overcoming Challenges: Procedural Generation Algorithm
 
-The three different bullet types — Split shot, Homing, and Normal — each posed their own programming challenges. The homing bullets in particular required careful tuning of the custom movement logic to feel satisfying without being overpowered.
+The thing I want with my game was rooms that felt ordered in size and shape, but also natural and not “box-like”. Since this was one of my earliest attempts at procedural generation, it took me over a month just to choose the right algorithm. This is because I started with binary space partitioning, which is the process of taking a bounding box and using its positions to procedurally generate rooms with tiles, but this created boxes for rooms, and it didn’t feel right for my project. 
 
-Creating multiple enemy types was a significant undertaking. The centipede enemy using a line tracer for procedural animation, the cursed dog that rushes the player, and the stationary ranged enemy with distance-based behaviour changes all required different approaches to AI and animation.
+The solution ended up being to scrap that months worth of development and to use my new knowledge to choose a more appropriate algorithm for what I wanted, which ended up being random walk. 
 
-## Features I'm Proud Of
+## Key Takeaways & Optimisation
 
-- Dodge Rolling with its own animation and speed, avoiding damage on impact
-- Mini map showing the environment, player, enemies and the artefact
-- Chests with randomised weighted weapon spawning and custom opening animations
-- Circular Player Health Bar displayed around the mini map
-- Camera zoom in and out mechanic for better navigation
-- End screen timer systems with high score tracking
+One of the main points of optimisation and a good learning opportunity for me was object pooling, the process of replacing spawning and destroying with activation and inactivation to create pools of reusable objects. 
 
-## UI and Menus
+- **Takeaway 1 -** The power of persistence: Retrieving the artefact is the first project where I saw my vision through to the end, the total culmination of all my features, and being persistent with development is the key to being able to develop a game by myself.
+- **Takeaway 2 -** Scope Management: This was also the first project where I learned that scope isn’t just about the scale of a project, but where to focus your efforts, overall retreive the artefact was a big game for me, but It would have been even more polished if I focused on the core features like the PCG and weapons over stuff like rebinding.
 
-The UI work was extensive for this project. I built a main menu with custom animations, video settings with FPS, VSync, fullscreen and resolution support, sound settings with Master, Music, Ambience and SFX sliders, and two different rebind menus for controller and keyboard.
-
-## What I Learned
-
-This project taught me the value of scope management and iterative development. Building so many systems from scratch gave me a deep understanding of game architecture, but also showed me where I could have saved time by being more strategic about which features to prioritise.
-
-> Retrieve the Artefact was a turning point in my development journey — it proved to me that I could take on an ambitious project and see it through to completion.
-
-Looking back, this project laid the foundation for everything that followed. The lessons I learned here about procedural generation, weapon systems, and enemy AI have carried forward into all my subsequent work.
+Looking back on this project, it laid the foundation for making fun gameplay systems, UI and weird game ideas that persisted throughout the rest of my work.

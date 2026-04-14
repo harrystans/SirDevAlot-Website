@@ -4,19 +4,31 @@ date: 2026-04-12
 image: /images/MechHeadGameplayShot5.jpg
 award: "Staffordshire Games Institute 1UP Summer Placement"
 description: "Mech gameplay designer and programmer, boss and weapon systems, dynamic environment events, and level-specific gimmicks."
+tags: [Unreal, 3D, Blueprints]
 ---
-**Award:** Staffordshire Games Institute 1UP Summer Placement
+**Placement:** Staffordshire Games Institute 1UP Summer Placement
 
-Developed during Staffordshire Games Institute’s 1UP summer placement scheme, I worked as a gameplay designer and programmer for 6 weeks (18 hours a week). In this time I worked on a variety of things such as:
+**Project Overview:** During a competitive 6-week industry-simulated placement, I functioned as a Gameplay Programmer and Designer within a multi-disciplinary team. My primary focus was the technical implementation of the player’s mech locomotion and the architecture for high-impact boss encounters and environmental hazards.
 
 <p><iframe src="https://www.youtube.com/embed/JDvtloIgJmc" frameborder="0" allowfullscreen></iframe></p>
 
-## Key Contributions
+## Technical Highlights
 
-- **Mech Controller:** Developed the rotation of the mech with controller inputs for smooth and responsive gameplay.
-- **Boss and Weapon Systems:** Designed and created certain boss mechs in the game, contributing to unique and challenging encounters.
-- **Environment Events:** Implemented a variety of weather effects that damage the player, such as meteorite showers, snow storms, toxic sludge, hail, and lightning strikes.
-- **Gimmicks:** Developed level-specific features like a crane that picks up and moves the tank, and a tank that shoots randomly in the environment.
+**Precision Mech Locomotion & Input**
+
+**Dual-Axis Rotation Logic:**  Developed a responsive mech aim-and-rotate system. I utlised Quaternion interpolation ($Slerp$) to ensure smooth, frame-rate independent torso rotation, decoupling the aiming direction from the leg movement for a mech machine like feel.
+
+**Boss AI & Weapon Architecture**
+
+**Designed And implmented Bosses:** Designed Multiple Bosses, and programmed their unique behaviours such as a sludge boss. 
+
+**Dynamic Environmental Hazard System**
+
+**Modular Weather Controller:** Programmed a hazard system that procedurally triggered localised "Weather Events" (Meteorites, Lightning, Toxic Sludge).
+
+**Environmental Interaction Mechanics**
+
+**Physics Interaction Systems:** Developed specalised level mechanics, including a crane system that utilizes Transform parenting and Physics overrides to dynamically manipulate player position.
 
 ## Gameplay Screenshots
 

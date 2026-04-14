@@ -32,7 +32,7 @@ cover__image: '/images/37.jpg'
 author:
   name: Harry Stansfield
   title: Hello I’m Harry Stansfield
-  bio: Gameplay Designer & Programmer based in Manchester, I love designing and creating beautiful games. When I’m not working, I’m probably listening to relaxing music or traveling somewhere.
+  bio: Games Programmer based in Greater Manchester. I love designing fun and unusual game ideas, with a focus on the technical aspects of game development.
   image: '/images/TempProfile.jpg'
   avatar: '/images/TempProfile.jpg'
   button__text: See my works
@@ -43,7 +43,7 @@ author:
 
 projects__settings:
   projects__title: Latest <span class="text-span">Works</span> # Add a 'text-span' class to highlight text.
-  projects__description: These are my lastest games that I have made myself or been apart of making, they are all built with passion & creativity. 
+  projects__description: Here are some of my best and most polished works. All of my projects, including smaller or experimental ones, can be found in the blog section, this area highlights the work I’m most proud of.
 
 
 # #-------------------------------
