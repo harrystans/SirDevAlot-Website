@@ -38,7 +38,11 @@
 
               {% else %}
               <li class="nav__item">
-                <a href="{{ item.url | relative_url }}" class="nav__link{% if page.url == item.url %} active-link{% endif %}">{{ item.title }}</a>
+                {% if item.title == 'CV' %}
+                  <a href="{{ item.url | relative_url }}" class="nav__link{% if page.url == item.url %} active-link{% endif %}" target="_blank" rel="noopener">{{ item.title }}</a>
+                {% else %}
+                  <a href="{{ item.url | relative_url }}" class="nav__link{% if page.url == item.url %} active-link{% endif %}">{{ item.title }}</a>
+                {% endif %}
               </li>
               {% endif %}
             {% endfor %}

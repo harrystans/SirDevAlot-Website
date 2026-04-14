@@ -12,7 +12,7 @@ menu__settings:
     - title: 'Projects'
       url: '/projects/'
     - title: 'CV'
-      url: '/CV/'
+      url: '/assets/Portfolio%202026.pdf'
     - title: 'Blog'
       url: '/blog/'
     - title: 'About'
