@@ -15,12 +15,8 @@ menu__settings:
       url: '/CV/'
     - title: 'Blog'
       url: '/blog/'
-    - title: 'Pages'
-      submenu:
-      - url: '/about'
-        title: 'About'
-      - url: '/elements'
-        title: 'Elements'
+    - title: 'About'
+      url: '/about'
 
 
 # Call to action button

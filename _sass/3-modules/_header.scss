@@ -69,6 +69,10 @@
         display: block;
         margin: 0;
 
+        .nav__link {
+          color: $primary-color;
+        }
+
         &:last-child {
           margin-right: 0;
         }
@@ -123,6 +127,7 @@
           &.cta-button {
             margin-left: -4px;
             margin-bottom: 0;
+            color: $primary-color;
           }
         }
       }
@@ -233,6 +238,7 @@
         display: inline-flex;
         font-size: 16px;
         padding: 16px 24px;
+        color: $primary-color;
       }
     }
 
@@ -276,6 +282,7 @@
       font-size: 15px;
       border-radius: 4px;
       will-change: transform;
+      color: $primary-color;
 
       &:hover {
         background-color: rgba($primary-color, 0.07);
