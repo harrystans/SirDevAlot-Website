@@ -13,8 +13,6 @@ tags: [Unity, 2D, C#]
 
 <p><iframe src="https://www.youtube.com/embed/hbd46-uPhKw" frameborder="0" allowfullscreen></iframe></p>
 
-**Award:** ACC Best Games Design And Development Award 2023  
-
 ## Technical Highlights
 
 **Procedural World Generation**
