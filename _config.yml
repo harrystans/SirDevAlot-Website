@@ -12,6 +12,9 @@ plugins:
   - jekyll-sitemap
   - jekyll/tagging
 
+include:
+  - .well-known
+
 paginate: 6
 paginate_path: "/blog/page/:num"
 
